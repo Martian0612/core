@@ -1,0 +1,49 @@
+{% extends 'home/base.html' %}
+
+
+{% block title %}
+    Login
+{% endblock title %}
+    
+
+{% block content %}
+
+<div class = "container mt-5">
+    
+
+    <form class = "col-6 mx-auto card p-3 shadow-lg" method = "post">
+        {% if messages %}
+            {{messages}}
+        {% endif %}
+        {% csrf_token %}
+        <h2> Login </h2>
+        <hr>
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" required class="form-control" id="username" name = "username">
+        </div>
+
+        {% comment %} Will use email later on {% endcomment %}
+
+        {% comment %} <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1">
+        </div> {% endcomment %}
+    
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" required class="form-control" id="exampleInputPassword1" name = "password">
+        </div>
+    
+        {% comment %} Add show password functionality here {% endcomment %}
+    
+        {% comment %} <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div> {% endcomment %}
+        <p>Don't have an account? <a href="/register">Sign-up</a></p>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+
+</div>
+{% endblock content %}
