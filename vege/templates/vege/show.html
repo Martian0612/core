@@ -1,0 +1,128 @@
+{% extends "home/base.html" %}
+
+{% block title%}
+Show Receipes
+{% comment %} <style>
+    .table-borderded {
+        border-width : 2px;
+    }
+</style> {% endcomment %}
+{% endblock title %}
+
+{% block content %}
+<div class = "container">
+    <div class = "row">
+        <div class = "col">
+            <h3 class = "mt-4 text-center"> Our Healthy and Tastiest Receipes </h3>
+        </div>
+
+        <div class = "col-auto">
+            <br>
+            <a href="/logout " class = "btn btn-primary" role = "button">Logout</a>
+        </div>
+    </div>
+    
+</div>
+
+
+<hr>
+{% comment %} <form>
+    
+    <div class="input-group mb-3">
+        <input type="text" name = "search" id="searchInput" class="form-control">
+        <div class="input-group-append">
+            <span class = "input-group-text">
+                <button type = "submit" class = "btn btn-outline-primary">Search</button>
+            </span>
+        </div>
+      </div>
+</form>     {% endcomment %}
+
+<div class = "container mt-5">
+    <form >
+        <div class = "row">
+            <div class = "col-md-6 ">
+                <input type = "text" name = "search" id = "searchInput" class = "form-control" placeholder= "Search">
+            </div>
+
+            <div class = "col-md-6 " >
+                <button class = "btn btn-success">Search</button>
+            </div>
+
+        </div>
+    </form>
+</div>
+   
+<div class = "container mt-4">
+    <div class = "row justify-content-center">
+        <div class = "col-md-12">
+            <table class="table table-hover border ">
+                <thead>
+                    <tr>
+                    <th scope="col" class = "border">Sr.no.</th>
+                    <th scope="col" class = "border">Name</th>
+                    <th scope="col" class = "border">Description</th>
+                    <th scope="col" class = "border">Image</th>
+                    <th scope="col" class = "border">Action</th>
+                    </tr>
+                </thead>
+                {% for receipe in receipes %}
+                <tbody>
+                    <tr>
+                    <th scope="row" class = "border">{{forloop.counter}}</th>
+                    <td class = "border">{{receipe.receipe_name}}</td>
+                    <td class = "border">{{receipe.receipe_description}}</td>
+                    <td class = "border"><a href="{{receipe.receipe_image}}">{{receipe.receipe_image}}</a></td>
+                    {% comment %} <td class = "border"><img src="{{receipe.receipe_image}}" height="100" width="100"></td> {% endcomment %}
+                    <td class = "border">
+                        <a class="btn btn-success mb-2" href="update-receipe/{{receipe.id}}" role="button">Update</a>
+                        <a class="btn btn-danger" href="delete-receipe/{{receipe.id}}" role="button">Delete</a>
+                        {% comment %} <button type = "submit" class = "btn btn-success mb-2" name = "update" value = "update-receipe/{{receipe.id}}"> Update </button>
+                        <button type = "submit" class = "btn btn-danger" name = "delete" value = "update-receipe/{{receipe.id}}"> Delete </button> {% endcomment %}
+                    </td>
+                    </tr>
+                </tbody>
+                {% endfor%}
+                </table>
+        </div>
+    </div>
+    
+</div>
+
+{% comment %} <style>
+/* Add a class to your input field and use that for styling */
+    #searchInput.small-input {
+        width: 200px !important;
+    }
+
+</style> {% endcomment %}
+<script>
+    // Get the search input field
+    const searchInput = document.getElementById('searchInput');
+
+    // Add event listener to detect changes in the search input field
+    searchInput.addEventListener('input', function() {
+        // Get the current search query value
+        const searchQuery = this.value.trim();
+
+        // Get the current URL
+        let currentUrl = window.location.href;
+
+        // Check if there's already a search query in the URL
+        const searchParamIndex = currentUrl.indexOf('?search=');
+
+        // If there's an existing search query, replace it with the new one
+        if (searchParamIndex !== -1) {
+            currentUrl = currentUrl.substring(0, searchParamIndex);
+        }
+
+        // Append the new search query to the URL
+        const newUrl = currentUrl + (searchQuery ? `?search=${encodeURIComponent(searchQuery)}` : '');
+
+        // Update the browser's address bar with the new URL
+        history.replaceState(null, '', newUrl);
+    });
+</script>
+
+
+{%endblock content%}

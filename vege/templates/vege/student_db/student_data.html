@@ -1,0 +1,112 @@
+{% extends 'home/base.html'%}
+
+{% block title%}
+    Student Data
+{% endblock title%}
+
+
+{% comment %} {% block content%}
+<form>
+    <div container = "class" mb-4>
+        <input type = "text" name = "search" placehoder = "Search" >
+        <button type = "btn btn-primary"> Search</button>
+    </div>
+</form>
+
+<div class = "container mt-4">
+    <div class = "row justify-content-center">
+        <div class = "col-md-10">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope = "col">#</th>
+                        <th scope = "col"> Student Name</th>
+                        <th scope = "col"> Student Id</th>
+                        <th scope = "col"> Student Email</th>
+                        <th scope = "col"> Student Age</th>
+                        <th scope = "col"> Student Address</th>
+                    </tr>
+                </thead>
+            
+                {% for student in student_obj%}
+                <tbody>
+                    <tr>
+                        <th scope = row" class = "border">{{forloop.counter}}</th>
+                        <td scope = "row"> {{student.student_name}}</td>
+                        <td scope = "row"> {{student.student_id}}</td>
+                        <td scope = "row"> {{student.student_email}}</td>
+                        <td scope = "row"> {{student.student_age}}</td>
+                        <td scope = "row"> {{student.student_address}}</td>
+                    </tr>
+                    
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock content%} {% endcomment %}
+{% block content %}
+<div class = "container mt-5">
+    <form >
+        <div class = "row">
+            <div class = "col-md-6">
+                <input class = "form-control" placeholder= "search" name = "search" type = "text">
+            </div>
+            <div class = "col-md-6">
+                <button class = "btn btn-success">Search</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+<div class = "container mt-5">
+    <table class = "table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th scope = "col"> #</th>
+                <th scope = "col"> student_id</th>
+                <th scope = "col"> Department</th>
+                <th scope = "col"> student_name</th>
+                <th scope = "col"> student_email</th>
+                <th scope = "col"> student_age</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for student in student_obj%}
+                <tr>
+                    <th scope = "row"> {{forloop.counter}}</th>
+                    <td>
+                        <a href="view-marks/{{student.student_id}}">{{student.student_id}} </a>
+                         {% comment %} {{student.student_id}} </td> {% endcomment %}
+                    <td> {{student.department}} </td>
+                    <td> {{student.student_name}} </td>
+                    <td> {{student.student_email}} </td>
+                    <td> {{student.student_age}} </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="pagination-container col-md-6 offset-md-1">
+    <span class="step-links">
+
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+            {% if page_obj.has_previous %}
+              <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+              <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+            {% endif %}
+            </ul>
+        </nav>
+    </span>
+</div>
+{% endblock %}

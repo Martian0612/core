@@ -1,0 +1,44 @@
+{% extends 'home/base.html' %}
+
+
+{% block title %}
+    Receipe View
+{% endblock title %}
+    
+
+{% block content %}
+
+<div class = "container mt-5">
+    
+    <form class = "col-6 mx-auto card p-3 shadow-lg" method = "post" enctype = "multipart/form-data">
+        {% csrf_token %}
+
+        <h2> Update Receipe </h2>
+        <hr>
+        
+        <div class="mb-3">
+            <label for="Receipe Name" class="form-label">Receipe Name</label>
+            <input type="text" class="form-control" required name = "receipe_name" value = "{{receipe.receipe_name}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="Receipe Description" class="form-label">Receipe Description</label>
+            <textarea name="receipe_description" required class = "form-control">{{receipe.receipe_description}}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="Receipe Image" class="form-label" >Receipe Image</label>
+            <input type="file" class="form-control" name = "receipe_image">
+            <p class = "text-center">  {{receipe.receipe_image}} </p>
+        </div>     
+        
+        
+
+        <button type = "submit" class = 'btn btn-success mb-2'> Update Receipe </button>
+        <a href= "/show" class = "btn btn-primary" role = "button">Show</a>
+        {% comment %} <button type = "submit" class = 'btn btn-info'> <a href="/show">Show</a> </button> {% endcomment %}
+    </form>
+
+</div>
+{% endblock content %}
+    
